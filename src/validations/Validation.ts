@@ -1,4 +1,5 @@
 import { getDirectionsArray } from "@/helpers/MatrixHelper";
+import MessagesResources from "@/resources/Messages";
 import { Directions, Error } from "@/types/GlobalTypes";
 
 interface Props {
@@ -26,30 +27,28 @@ export function Validation({
       error: {
         validated: false,
         message:
-          "Landing positions must start with 2 numbers which correspond with points X and Y respectively. And must have a letter which correspond a orientation.",
+          MessagesResources.Error.WrongFormatWithLenghtLandingPositionStrings,
       },
     };
   if (!regexLandingPosition.test(landingPosition))
     return {
       error: {
         validated: false,
-        message:
-          "Landing position must have a values like numbers between 0 to 9 and letters like N S E W.",
+        message: MessagesResources.Error.WrongFormatOfLandingPositions,
       },
     };
   if (plateauSizeX <= 0 || plateauSizeY <= 0)
     return {
       error: {
         validated: false,
-        message: "Plateau must have sizes bigger than 0.",
+        message: MessagesResources.Error.WrongSizeOfPlateau,
       },
     };
   if (!regexCartesianPoint.test(cartesianPoints))
     return {
       error: {
         validated: false,
-        message:
-          "Cartesian points must have letters like L and R. And M for walk.",
+        message: MessagesResources.Error.WrongFormatOfCartesianPoints,
       },
     };
 
@@ -63,6 +62,18 @@ export const validateMatrixLenght = (
   matrixPositionY: number,
   newDirections: Directions
 ): ValidationReturn => {
+  debugger;
+  const message = MessagesResources.Error.TheresNoSpaceToWalkWithRover;
+
+  if (newDirections.x < 0 || newDirections.y < 0) {
+    return {
+      error: {
+        validated: false,
+        message,
+      },
+    };
+  }
+
   if (
     matrixPositionX <= newDirections.x ||
     matrixPositionY <= newDirections.y
@@ -70,8 +81,7 @@ export const validateMatrixLenght = (
     return {
       error: {
         validated: false,
-        message:
-          "There's no space to walk with rover. This rover costs a billion of dollars. You don't wanna to walk that into a hole, right?",
+        message,
       },
     };
   }

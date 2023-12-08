@@ -65,11 +65,6 @@ export default function Home() {
     }
 
     setVisible(true);
-    console.log(`Landing position: ${landingPosition}`);
-    console.log(`Instructions: ${cartesianPoints}`);
-    console.log(
-      `Final Position: ${directions.x} ${directions.y} ${directions.orientation}`
-    );
   };
 
   return (

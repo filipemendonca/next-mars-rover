@@ -77,14 +77,14 @@ export const roverWalk = (
     case "M":
       changeOrientationThroughPlateau(directions);
 
-      var validateMatrixPosition = validateMatrixLenght(
+      var validateLenght = validateMatrixLenght(
         matrixLenght.x,
         matrixLenght.y,
         directions
       );
 
-      if (!validateMatrixPosition.error.validated) {
-        directions.error = validateMatrixPosition.error;
+      if (!validateLenght.error.validated) {
+        directions.error = validateLenght.error;
         return directions;
       }
 

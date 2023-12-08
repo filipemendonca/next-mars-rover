@@ -1,35 +1,16 @@
-import { getCartesianPoints } from "@/helpers/MatrixHelper";
-import { Directions, Matrix, RoverProps } from "@/types/GlobalTypes";
-import { extractDirections, initMappingPlateau } from "./PlateauConfigurations";
-import {
-  refreshRoverPositionIntoPlateau,
-  roverWalk,
-} from "./MovementConfigurations";
+import { Directions, Matrix } from "@/types/GlobalTypes";
+import { roverWalk } from "./MovementConfigurations";
 
 let directions: Directions;
-let plateau: Matrix;
 
-export const initRover = ({
-  landingPosition,
-  cartesianPoints,
-  plateauSizeX,
-  plateauSizeY,
-}: RoverProps): Directions => {
-  const roverWalkCommandsArray = getCartesianPoints(cartesianPoints);
-
-  if (plateauSizeX && plateauSizeY)
-    plateau = initMappingPlateau({ plateauSizeX, plateauSizeY });
-
-  directions = extractDirections(landingPosition);
-
-  const matrix = refreshRoverPositionIntoPlateau({
-    directions,
-    plateauMatrix: plateau,
-  });
-
-  for (let i = 0; i <= roverWalkCommandsArray.length; i++) {
-    const command = roverWalkCommandsArray[i];
-    directions = roverWalk(command, directions, matrix);
+export const initRover = (
+  cartesianPointsArray: string[],
+  matrix: Matrix,
+  model: Directions
+): Directions => {
+  for (let i = 0; i <= cartesianPointsArray.length; i++) {
+    const command = cartesianPointsArray[i];
+    directions = roverWalk(command, model, matrix);
     if (directions.error !== null && !directions.error?.validated) break;
   }
 

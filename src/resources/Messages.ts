@@ -9,6 +9,8 @@ const MessagesResources = {
     WrongFormatWithLenghtLandingPositionStrings:
       "Landing positions must start with 2 numbers which correspond with points X and Y respectively. And must have a letter which correspond a orientation.",
     WrongSizeOfPlateau: "Plateau must have sizes bigger than 0.",
+    SamePositionRover:
+      "The rovers can't ocupate the same position! They don't a Megazord!",
   },
 };
 

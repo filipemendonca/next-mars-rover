@@ -5,6 +5,11 @@ export type Error = {
 
 export type Matrix = Array<string[]>;
 
+export type MatrixProps = {
+  plateauSizeX: number;
+  plateauSizeY: number;
+};
+
 export type Directions = {
   x: number;
   y: number;
@@ -15,6 +20,4 @@ export type Directions = {
 export type RoverProps = {
   landingPosition: string;
   cartesianPoints: string;
-  plateauSizeX: number;
-  plateauSizeY: number;
 };
